@@ -48,7 +48,7 @@ export default function FileUploadTool({caption}) {
                           >
                             
                             <input id="file-upload" name="file-upload" type="file"  onChange={async(e)=>{
-                              
+                              alert('File received')
                               changeLoading()
                             
                               
