@@ -34,14 +34,14 @@ export default function SignUp() {
       <div>
           <label for="username" class="sr-only">Email address</label>
           <input onChange={(e)=>{
-            setUserName(e.target.value)
+            setEmail(e.target.value)
           }} id="username" name="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Name" />
         </div>
 
         <div>
           <label for="email-address" class="sr-only">Email address</label>
           <input onChange={(e)=>{
-            setEmail(e.target.value)
+            setUserName(e.target.value)
           }} id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="User Names" />
         </div>
 
@@ -119,8 +119,7 @@ export default function SignUp() {
               window.location.href = '/myaccount'
             
           }catch(error){
-            console.log(error.response.data.message)
-            console.log(email)
+
             try{toast.error(error.response.data.details[0].message)}catch(e){}
             try{toast.error(error.response.data.message)}catch(e){}
           }

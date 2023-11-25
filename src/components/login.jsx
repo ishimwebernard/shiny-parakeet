@@ -55,13 +55,12 @@ export default function Login() {
               data: {Email:email,Password:password},
               url: 'http://localhost:3000/api/login'
             })
+            localStorage.setItem('userInformation', JSON.stringify(signIn.data))
             localStorage.setItem('activeaccount', email)
               toast.success('Login Succesful')
               window.location.href = '/myaccount'
             
           }catch(error){
-            console.log(error.response.data.message)
-            console.log(email)
             try{toast.error(error.response.data.details[0].message)}catch(e){}
             try{toast.error(error.response.data.message)}catch(e){}
             //window.location.reload()
@@ -75,7 +74,9 @@ export default function Login() {
           </span>
           Sign in
         </button>
-        <button class="group bg-blue-600 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button onClick={()=>{
+          window.location.href = '/signup'
+        }} class="group bg-blue-600 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           Sign Up
           </button>
       </div>

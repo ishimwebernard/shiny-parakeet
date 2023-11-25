@@ -9,7 +9,7 @@ const override = css`
   border-color: "#94a3b8";
 `;
 
-export default function FileUploadTool({caption}) {
+export default function FileUploadTool({caption, fileChanged}) {
   let [loading, setLoading] = useState(false)
   let [color, setColor] = useState("#94a3b8");
   function changeLoading(){
@@ -47,11 +47,8 @@ export default function FileUploadTool({caption}) {
                             className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
                             
-                            <input id="file-upload" name="file-upload" type="file"  onChange={async(e)=>{
-                              alert('File received')
-                              changeLoading()
-                            
-                              
+                            <input id="file-upload" name="file-upload" type="file" onChange={(e)=>{
+                              fileChanged(e.target.files[0])
                             }} />
                           </label>
                         

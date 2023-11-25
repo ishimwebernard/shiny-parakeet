@@ -25,7 +25,7 @@ export default function Applc() {
 <Pagination elements={[
   {
     route: "/documents",
-    caption: "Submit Contents"
+    caption: "Submit Design"
   },
 
   {

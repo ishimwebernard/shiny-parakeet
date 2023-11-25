@@ -34,7 +34,7 @@ let availTo = '';
 <Pagination elements={[
   {
     route: "/documents",
-    caption: "Submit Contents"
+    caption: "Submit Design"
   },
 
   {

@@ -101,16 +101,10 @@ export default function HomeRefurbished() {
 
             <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Why PrimECS?</h2>
       <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-        Explore Programs By Discipline
+        Explore Programs By hh
       </p>
             <div className="mt-10"></div>
-           <div  className="flex space-x-2">
-<CardWithImage title="Architecture" image={Architecture} content="Artistry, design and Drawings"/>
-<CardWithImage title="Engineering" image={Engineering} content="Technical Analysis and Design"/>
-<CardWithImage title="Construction" image={Construction} content="Planning, Execution and Monitoring" />
- <CardWithImage title="Leadership" image={Leadership} content="Influencing the outcome" />
 
-      </div>
       <div className="py-10"></div>
 
       <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Why PrimECS?</h2>
@@ -118,13 +112,7 @@ export default function HomeRefurbished() {
         Explore Programs by delivery mode
       </p>
 <div className="mt-10"></div>
-<div  className="flex space-x-4">
-    <CardWithImage image={OnSite} title="Live On Site" content="In person attendace events" />
-<CardWithImage image={Online} title="Live Online" content="Courses by Video Confrence" />
-<CardWithImage image={Demand} title="On-Demand" content="Access to recorded courses" />
-<CardWithImage image={Custom} title="Custom" content="Custom, one-on-one and hybrid" />
 
-</div>
 
 <div className="pb-20">
 <div className="py-10"></div>

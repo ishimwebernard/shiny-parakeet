@@ -49,12 +49,12 @@ export default function Home() {
             </section>
             <section>
             <p className="font-poppins-light text-2xl m-4 md:ml-20 md:mt-10 md:text-4xl">Explore Programs by Discipline</p>
-                <CardSwiper />
+                {/* <CardSwiper /> */}
                 <p className="font-poppins-light text-2xl m-4 md:ml-20 md:mt-10 md:text-4xl">Explore Programs by Delivery Mode</p>
-                <Deliver />
+                {/* <Deliver /> */}
                 <p className="font-poppins-light text-2xl m-4 md:ml-20 md:mt-10 md:text-4xl">Explore Programs by Experience</p>
                 <section>
-                <Experience />
+                {/* <Experience /> */}
                 </section>
             </section>
             <Footer />
