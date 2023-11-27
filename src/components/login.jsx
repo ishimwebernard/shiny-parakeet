@@ -57,6 +57,7 @@ export default function Login() {
             })
             localStorage.setItem('userInformation', JSON.stringify(signIn.data))
             localStorage.setItem('activeaccount', email)
+           localStorage.setItem('activeaccountRole', signIn.data.credentials.Role)
               toast.success('Login Succesful')
               window.location.href = '/myaccount'
             

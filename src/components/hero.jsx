@@ -22,16 +22,11 @@ export default function Hero() {
             <span class="deep-text block green xl:inline"> Communications system</span> 
           </h1>
           <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-          We help you unleash the necessary skillset vital for a problem solver, via real life practices of analysis and design of some of the complex structures in the industry.
+          Elevate your design process with our innovative system. Experience a new level of precision and efficiency that simplifies collaboration, enhances creativity, and ensures exceptional design outcomes. Join us on a journey to transform your design management and elevate your creative potential
 
 </p>
           <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 
-            <div class="mt-3 sm:mt-0 sm:ml-3">
-              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-800 hover:bg-blue-light md:py-4 md:text-lg md:px-10">
-                Learn More
-              </a>
-            </div>
           </div>
         </div>
       </main>

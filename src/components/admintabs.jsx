@@ -22,6 +22,9 @@ const returnStatus = (n)=>{
 
 }
 const ViewDesignAdmin = (onClick) => {
+    const [feedbackText, setFeedbackText] = React.useState('')
+    const [feedbackFile, setFeedbackFile] = React.useState(null)
+
     return (
         <div className="w-full p-10 bg-black bg-opacity-20 h-full z-50 absolute fixed">
             <div className="bg-white w-full h-full grid grid-cols-2">
@@ -31,22 +34,38 @@ const ViewDesignAdmin = (onClick) => {
                 <p className='text-sm text-left p-4'>
                     {localStorage.getItem('aadmindesc')}
                 </p>
-                <textarea id="message" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 m-4" placeholder="Leave a comment..."></textarea>
-                <input type='file'/>
+                <textarea onChange={(e)=>{
+                    setFeedbackText(e.target.value)
+                }} id="message" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2 m-4" placeholder="Leave a comment..."></textarea>
+                <input type='file' key='uploaded_file' onChange={(e)=>{
+                    setFeedbackFile(e.target.files[0])
+                }}/>
                 <div className='flex px-4 space-x-2 mt-2 self-start'>
                 <div onClick={()=>{
 
                 }}>
                 <div onClick={async()=>{
                     try{
-                        const load = await axios({
-                            method: 'post',
-                            
-                        })
-                    }catch(e){
+                        let feedbackObject = new FormData()
+                        feedbackObject.append('DesignId', localStorage.getItem('aadminid'))
+                        feedbackObject.append('CustomerEmail', localStorage.getItem('activeaccount'))
+                        feedbackObject.append('uploaded_file', feedbackFile)
+                        feedbackObject.append('CustomerText', feedbackText)
 
+                        const load = await axios.post('http://localhost:3000/api/submitfeedback',
+                        feedbackObject,
+                        {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                              }
+                        }
+                        )
+                        toast.success('Feedback Succesfully Submitted')
+
+                    }catch(e){
+                        console.log(e)
+                        toast.error(e.response.data.message || 'Something went wrong')
                     }
-                    toast.success('Sending Comment')
                 }}>
                 <Button text='Send Comment' />
                 </div>

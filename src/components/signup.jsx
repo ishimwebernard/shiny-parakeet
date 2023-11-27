@@ -68,7 +68,11 @@ export default function SignUp() {
 
 <select name="cars" id="cars">
   <option value="designer" onClick={()=>{
+    alert(role)
     setRole(0)
+  }} onSelect={()=>{
+    alert(role)
+
   }}>Reviewer</option>
   <option value="reviewer" onClick={()=>{
     setRole(1)

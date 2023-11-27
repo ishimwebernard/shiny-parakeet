@@ -12,7 +12,7 @@ const Administrator = () => {
     <Logocomponent />
       <small class="self-center text-sm font-thin tet-center leading-tight">An Education and Leadership Division of PRIMECS LLC</small>
   </a>
-  <p>isbernard2300@gmail.com</p>
+  <p>{localStorage.getItem('activeaccount')}</p>
   <p>ADMIN</p>
   <div class="flex md:order-2">
     <a href="/signin">
@@ -33,7 +33,6 @@ const Administrator = () => {
     </div>
  )
 }
-const isAdmin = true
 
 
 
@@ -47,6 +46,13 @@ const User = () => {
     )
 }
 export default function MyAccount(){
+  let isAdmin = false
+  switch (localStorage.getItem('activeaccountRole')){
+    case 1:
+      isAdmin = false
+    case 2:
+      isAdmin = true  
+  }
     return (
         <div className='w-full bg-black overflow-hidden p-0'>
 
