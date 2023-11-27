@@ -155,7 +155,7 @@ const ViewFeedback = (onClick) => {
                   File
               </th>
               <td class="px-6 py-4">
-          {localStorage.getItem('afile')}
+          <img className='h-1/2' src={'http://localhost:3000/publicfiles/'+localStorage.getItem('afile')} />
 
               </td>
             

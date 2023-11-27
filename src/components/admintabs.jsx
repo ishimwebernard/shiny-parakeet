@@ -48,7 +48,7 @@ const ViewDesignAdmin = (onClick) => {
                     try{
                         let feedbackObject = new FormData()
                         feedbackObject.append('DesignId', localStorage.getItem('aadminid'))
-                        feedbackObject.append('CustomerEmail', localStorage.getItem('activeaccount'))
+                        feedbackObject.append('CustomerEmail', localStorage.getItem('aafeedbackemail'))
                         feedbackObject.append('uploaded_file', feedbackFile)
                         feedbackObject.append('CustomerText', feedbackText)
 
@@ -218,6 +218,7 @@ export default function AdminTabs() {
                             Status: 1
                         }
                     })
+                    localStorage.setItem('aafeedbackemail', data.data[i].OrganizationName)
                     localStorage.setItem('aadmindesc', data.data[i].Type)
                     localStorage.setItem('aadminid', data.data[i].id)
                     localStorage.setItem('aadminimage', `http://localhost:3000/publicfiles/${data.data[i].Files}`)
