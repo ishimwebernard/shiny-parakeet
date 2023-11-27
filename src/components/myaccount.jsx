@@ -6,7 +6,7 @@ import AdminTabs from './admintabs'
 const Administrator = () => {
  return (
     <div>
-                <nav class="bg-white border-gray-200 px-2 py-4 z-50">
+                <nav class="bg-white border-gray-200 px-2 py-4 z-50 w-full">
   <div class="container mx-auto flex flex-wrap items-center justify-between">
   <a href="/" class="flex flex-col">
     <Logocomponent />
@@ -33,7 +33,7 @@ const Administrator = () => {
     </div>
  )
 }
-const isAdmin = false
+const isAdmin = true
 
 
 
@@ -48,7 +48,7 @@ const User = () => {
 }
 export default function MyAccount(){
     return (
-        <div className='w-full bg-black overflow-hidden'>
+        <div className='w-full bg-black overflow-hidden p-0'>
 
         {isAdmin ? <Administrator/> : <User />}
 

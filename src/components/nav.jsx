@@ -5,7 +5,7 @@ export default function Nav() {
 
            
 
-<nav class="bg-white border-gray-200 px-2 py-4 z-50">
+<nav class="bg-while border-gray-200 px-2 py-4 z-50 absolute w-full">
   <div class="container mx-auto flex flex-wrap items-center justify-between">
   <a href="/" class="flex flex-col">
     <Logocomponent />
