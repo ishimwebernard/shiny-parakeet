@@ -66,17 +66,16 @@ export default function SignUp() {
         </div>
         <label for="cars">Role</label>
 
-<select name="cars" id="cars">
-  <option value="designer" onClick={()=>{
-    alert(role)
-    setRole(0)
-  }} onSelect={()=>{
-    alert(role)
-
-  }}>Reviewer</option>
-  <option value="reviewer" onClick={()=>{
-    setRole(1)
-  }}>Designer</option>
+<select onChange={(e)=>{
+  switch (e.target.value){
+    case 'designer':
+      setRole(1)
+    case 'reviewer':
+      setRole(0)
+  }
+}}>
+  <option value="designer">Reviewer</option>
+  <option value="reviewer">Designer</option>
 </select>
 
 <div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">

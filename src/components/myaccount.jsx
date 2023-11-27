@@ -46,17 +46,11 @@ const User = () => {
     )
 }
 export default function MyAccount(){
-  let isAdmin = false
-  switch (localStorage.getItem('activeaccountRole')){
-    case 1:
-      isAdmin = false
-    case 2:
-      isAdmin = true  
-  }
+  let isAdmin = localStorage.getItem('activeaccountRole')
     return (
         <div className='w-full bg-black overflow-hidden p-0'>
 
-        {isAdmin ? <Administrator/> : <User />}
+        {isAdmin == 0 ? <Administrator/> : <User />}
 
         </div>
     )
