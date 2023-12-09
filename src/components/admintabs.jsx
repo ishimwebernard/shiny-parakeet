@@ -232,7 +232,6 @@ export default function AdminTabs() {
                     console.log(localStorage.getItem('aadmindesigneremail'))
                 }}>
                     <Button text='Review & Comment' onClick={()=>{
-                        'Hello')
                     }}/>
                 </td>
                 <td scope="col" className="px-6 py-3">

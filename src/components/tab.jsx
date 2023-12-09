@@ -270,7 +270,6 @@ export default function VerticalTabs() {
       
     }catch(e){
       console.log(e)
-      'Something went wrong')
     }
   }
   
@@ -310,7 +309,7 @@ export default function VerticalTabs() {
       setMyDesigns(fin)
     }catch(e){
       console.log(e)
-      'Something went wrong!',e)
+      alert('Something went wrong!',e)
     }
   }
   const fetchMyApprovedDesigns = async()=>{
@@ -348,7 +347,7 @@ export default function VerticalTabs() {
       setApprovedDesigns(fin)
     }catch(e){
       console.log(e)
-      'Something went wrong!',e)
+      alert('Something went wrong!',e)
     }
   }
 
@@ -387,7 +386,7 @@ export default function VerticalTabs() {
       setRejectedDesigns(fin)
     }catch(e){
       console.log(e)
-      'Something went wrong!',e)
+      alert('Something went wrong!',e)
     }
   }
   
@@ -435,7 +434,7 @@ export default function VerticalTabs() {
         <FileUploadTool caption="Design File" key="uploaded_file" fileChanged={onChange}/>
         <div class="h-5"></div>
         <select onChange={(e)=>{
-          e.target.value)
+          alert(e.target.value)
           setCustEmail(e.target.value)
         }}>
 {customers}
