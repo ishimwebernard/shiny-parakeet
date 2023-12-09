@@ -433,8 +433,8 @@ export default function VerticalTabs() {
         <div class="shadow overflow-visible sm:rounded-md p-8 ">
         <FileUploadTool caption="Design File" key="uploaded_file" fileChanged={onChange}/>
         <div class="h-5"></div>
+        <p>Choose your Customer</p>
         <select onChange={(e)=>{
-          alert(e.target.value)
           setCustEmail(e.target.value)
         }}>
 {customers}

@@ -32,50 +32,41 @@ export default function SignUp() {
       <input type="hidden" name="remember" value="true"/>
       <div class="rounded-md shadow-sm -space-y-px">
       <div>
-          <label for="username" class="sr-only">Email address</label>
-          <input onChange={(e)=>{
-            setEmail(e.target.value)
-          }} id="username" name="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Name" />
-        </div>
-
-        <div>
-          <label for="email-address" class="sr-only">Email address</label>
           <input onChange={(e)=>{
             setUserName(e.target.value)
-          }} id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="User Names" />
+          }}class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="User Names" />
+        </div>
+      <div>
+          <input onChange={(e)=>{
+            setEmail(e.target.value)
+          }}class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email" />
         </div>
 
+
+
         <div>
-          <label for="phone" class="sr-only">Email address</label>
           <input onChange={(e)=>{
             setPhone(e.target.value)
-          }} id="phone" name="phone" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone Number" />
+          }} class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone Number" />
         </div>
         <div>
-          <label for="location" class="sr-only">Email address</label>
           <input onChange={(e)=>{
             setLocation(e.target.value)
-          }} id="location" name="location" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Location" />
+          }} class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Location" />
         </div>
 
         <div>
-          <label for="password" class="sr-only">Password</label>
           <input onChange={(e)=>{
             setPassword(e.target.value)
-          }} id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
+          }} required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
         </div>
         <label for="cars">Role</label>
 
 <select onChange={(e)=>{
-  switch (e.target.value){
-    case 'designer':
-      setRole(1)
-    case 'reviewer':
-      setRole(0)
-  }
+setRole(e.target.value)
 }}>
-  <option value="reviewer">Customer</option>
-  <option value="designer">Designer</option>
+  <option value={0}>Customer</option>
+  <option value={1}>Designer</option>
 </select>
 
 <div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
@@ -118,6 +109,7 @@ export default function SignUp() {
               url: 'http://localhost:3000/api/signup'
             })
             localStorage.setItem('activeaccount', email)
+            localStorage.setItem('activeaccountRole', role)
               toast.success('Sending you to your account')
               window.location.href = '/myaccount'
             
