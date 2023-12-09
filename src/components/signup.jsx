@@ -74,8 +74,8 @@ export default function SignUp() {
       setRole(0)
   }
 }}>
-  <option value="designer">Reviewer</option>
-  <option value="reviewer">Designer</option>
+  <option value="reviewer">Customer</option>
+  <option value="designer">Designer</option>
 </select>
 
 <div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
