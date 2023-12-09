@@ -182,6 +182,8 @@ const ViewFeedback = (onClick) => {
 export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
   const [viewFeedback, setViewFeedback] = React.useState(false)
+  const [customers, setCustomers] = React.useState([])
+  const [custEmail, setCustEmail] = React.useState('')
   const [feedbacks, setFeedbacks] = React.useState([
     <tr>
     No data found!
@@ -248,13 +250,34 @@ export default function VerticalTabs() {
     setFeedbacks(retval)
   }, [])
 
+  const fetchAllDesigners = async() => {
+    let options = []
+    try {
+      const allCustomers = await axios({
+        method: 'get',
+        url: 'http://localhost:3000/api/getAllCustomers'
+      })
+      console.log(allCustomers)
+      for (let i = 0; i < allCustomers.data.credentials.length; i++){
+        options.push(
+          <option value={allCustomers.data.credentials[i].Email}>{allCustomers.data.credentials[i].Username}</option>
+        )
+      }
+      setCustomers(options)
+      
+    }catch(e){
+      console.log(e)
+      alert('Something went wrong')
+    }
+  }
+  
   const fetchMyDesigns = async()=>{
     console.log(localStorage.getItem('activeaccount'))
     try{
       let fin = []
       const designObjectsFromServer = await axios({
         method: 'post',
-        data: {Email: localStorage.getItem('activeaccount')},
+        data: {DesignerEmail: localStorage.getItem('activeaccount')},
         url: 'http://localhost:3000/api/viewSubmittedContent'
       })
       console.log(designObjectsFromServer.data)
@@ -272,7 +295,7 @@ export default function VerticalTabs() {
             <td class="px-6 py-4">
               <p  onClick={()=>{
                 localStorage.setItem('adesfile',designObjectsFromServer.data[i].Files)
-                localStorage.setItem('adestext', designObjectsFromServer.data[i].Type)
+                localStorage.setItem('adestext', designObjectsFromServer.data[i].Description)
 
                 setViewDesign(true)
               }} class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View Design</p>
@@ -291,7 +314,7 @@ export default function VerticalTabs() {
 
   
   React.useEffect(()=>{
-    //fetchMyDesigns()
+    fetchAllDesigners()
    fetchData()
   }, [fetchData])
  
@@ -331,6 +354,12 @@ export default function VerticalTabs() {
         <div class="shadow overflow-visible sm:rounded-md p-8 ">
         <FileUploadTool caption="Design File" key="uploaded_file" fileChanged={onChange}/>
         <div class="h-5"></div>
+        <select onChange={(e)=>{
+          alert(e.target.value)
+          setCustEmail(e.target.value)
+        }}>
+{customers}
+</select>
         <textarea
           onChange={(e)=>{
             setType(e.target.value)
@@ -340,8 +369,9 @@ export default function VerticalTabs() {
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button onClick={async()=>{
               let submissionObject = new FormData()
-              submissionObject.append('Type', type)
-              submissionObject.append('OrganizationName', userInformation.Email)
+              submissionObject.append('Description', type)
+              submissionObject.append('DesignerEmail', userInformation.Email)
+              submissionObject.append('CustomerEmail',custEmail)
               submissionObject.append('Status', 0)
               submissionObject.append('uploaded_file', selectedFile)
               console.log(selectedFile)
@@ -367,7 +397,7 @@ export default function VerticalTabs() {
                   toast.error(e.response.data.message)
                   setButtonText('Submit design')
                 }else{
-                  toast.error('Something went wrong')
+                  toast.error(e.response.data.details[0].message)
                 }
                 console.log(e)
               }
