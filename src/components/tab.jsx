@@ -61,7 +61,7 @@ const Nav = () => {
 <div class="container mx-auto flex flex-wrap items-center justify-between">
 <a href="/" class="flex flex-col">
   <Logocomponent />
-    <small class="self-center text-sm font-thin tet-center leading-tight">An Education and Leadership Division of PRIMECS LLC</small>
+    <small class="self-center text-sm font-thin tet-center leading-tight">Designs Tracking and Correction System</small>
 </a>
 <p>{userInformation.Username}</p>
 <div class="flex md:order-2">
@@ -160,12 +160,6 @@ const ViewFeedback = (onClick) => {
               </td>
             
           </tr>
-          
-          
-          
-
-
-
       </tbody>
   </table>
   <button onClick={()=>{
@@ -190,7 +184,16 @@ export default function VerticalTabs() {
 </tr>
   ])
   const [viewDesign, setViewDesign] = React.useState(false)
-
+  const [myApprovedDesigns, setApprovedDesigns] = React.useState([
+    <tr>
+    No Approved designs found!
+</tr>
+  ])
+  const [myRejectedDesigns, setRejectedDesigns] = React.useState([
+    <tr>
+    No Rejected designs found!
+</tr>
+  ])
   const [myDesigns, setMyDesigns] = React.useState([
     <tr>
     <th scope="col" class="px-6 py-3">
@@ -213,8 +216,8 @@ export default function VerticalTabs() {
   const fetchData = React.useCallback(async() => {
     const fbks = await axios({
       method: 'post',
-      data: {Email: localStorage.getItem('activeaccount')},
-      url: 'http://localhost:3000/api/getFeedback'
+      data: {DesignerEmail: localStorage.getItem('activeaccount')},
+      url: 'http://localhost:3000/api/getFeedbackDesigner'
     })
 
 
@@ -260,7 +263,7 @@ export default function VerticalTabs() {
       console.log(allCustomers)
       for (let i = 0; i < allCustomers.data.credentials.length; i++){
         options.push(
-          <option value={allCustomers.data.credentials[i].Email}>{allCustomers.data.credentials[i].Username}</option>
+          <option value={allCustomers.data.credentials[i].Email}>{allCustomers.data.credentials[i].Username} | {allCustomers.data.credentials[i].Email}</option>
         )
       }
       setCustomers(options)
@@ -280,8 +283,7 @@ export default function VerticalTabs() {
         data: {DesignerEmail: localStorage.getItem('activeaccount')},
         url: 'http://localhost:3000/api/viewSubmittedContent'
       })
-      console.log(designObjectsFromServer.data)
-      
+     
       if (designObjectsFromServer.data.length != 0){
         for(let i = 0; i < designObjectsFromServer.data.length; i++){
           fin.push(
@@ -290,7 +292,7 @@ export default function VerticalTabs() {
                 {designObjectsFromServer.data[i].id}
             </td>
             <td scope="col" class="px-6 py-3">
-            {designObjectsFromServer.data[i].Type} 
+            {designObjectsFromServer.data[i].Description} 
             </td>
             <td class="px-6 py-4">
               <p  onClick={()=>{
@@ -311,7 +313,83 @@ export default function VerticalTabs() {
       alert('Something went wrong!',e)
     }
   }
+  const fetchMyApprovedDesigns = async()=>{
+    try{
+      let fin = []
+      const designObjectsFromServer = await axios({
+        method: 'post',
+        data: {DesignerEmail: localStorage.getItem('activeaccount')},
+        url: 'http://localhost:3000/api/viewDesignerApprovedDesingns'
+      })
+     console.log(designObjectsFromServer)
+      if (designObjectsFromServer.data.length != 0){
+        for(let i = 0; i < designObjectsFromServer.data.length; i++){
+          fin.push(
+            <tr>
+            <td scope="col" class="px-6 py-3">
+                {designObjectsFromServer.data[i].id}
+            </td>
+            <td scope="col" class="px-6 py-3">
+            {designObjectsFromServer.data[i].Description} 
+            </td>
+            <td class="px-6 py-4">
+              <p  onClick={()=>{
+                localStorage.setItem('adesfile',designObjectsFromServer.data[i].Files)
+                localStorage.setItem('adestext', designObjectsFromServer.data[i].Description)
 
+                setViewDesign(true)
+              }} class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View Design</p>
+          </td>
+        </tr>
+          )
+        }
+      }
+
+      setApprovedDesigns(fin)
+    }catch(e){
+      console.log(e)
+      alert('Something went wrong!',e)
+    }
+  }
+
+  const fetchMyRejectedDesigns = async()=>{
+    try{
+      let fin = []
+      const designObjectsFromServer = await axios({
+        method: 'post',
+        data: {DesignerEmail: localStorage.getItem('activeaccount')},
+        url: 'http://localhost:3000/api/viewDesignerRejectedDesingns'
+      })
+     console.log(designObjectsFromServer)
+      if (designObjectsFromServer.data.length != 0){
+        for(let i = 0; i < designObjectsFromServer.data.length; i++){
+          fin.push(
+            <tr>
+            <td scope="col" class="px-6 py-3">
+                {designObjectsFromServer.data[i].id}
+            </td>
+            <td scope="col" class="px-6 py-3">
+            {designObjectsFromServer.data[i].Description} 
+            </td>
+            <td class="px-6 py-4">
+              <p  onClick={()=>{
+                localStorage.setItem('adesfile',designObjectsFromServer.data[i].Files)
+                localStorage.setItem('adestext', designObjectsFromServer.data[i].Description)
+
+                setViewDesign(true)
+              }} class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View Design</p>
+          </td>
+        </tr>
+          )
+        }
+      }
+
+      setRejectedDesigns(fin)
+    }catch(e){
+      console.log(e)
+      alert('Something went wrong!',e)
+    }
+  }
   
   React.useEffect(()=>{
     fetchAllDesigners()
@@ -346,7 +424,9 @@ export default function VerticalTabs() {
       >
         <Tab label="Submit Design" {...a11yProps(0)} />
         <Tab label="View Feedbacks" {...a11yProps(1)} />
-        <Tab label="My Designs" {...a11yProps(1)} onClick={fetchMyDesigns}/>
+        <Tab label="My Designs" {...a11yProps(2)} onClick={fetchMyDesigns}/>
+        <Tab label="Accepted Designs" {...a11yProps(3)} onClick={fetchMyApprovedDesigns}/>
+        <Tab label="Rejected Designs" {...a11yProps(4)} onClick={fetchMyRejectedDesigns}/>
 
       </Tabs>
      <div className=' w-screen'>
@@ -455,6 +535,51 @@ export default function VerticalTabs() {
         </thead>
         <tbody>
 {myDesigns}
+        </tbody>
+    </table>
+      </TabPanel>
+
+
+      <TabPanel value={value} index={3}>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Design ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Description 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+{myApprovedDesigns}
+        </tbody>
+    </table>
+      </TabPanel>
+
+      <TabPanel value={value} index={4}>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Design ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Description 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+{myRejectedDesigns}
         </tbody>
     </table>
       </TabPanel>

@@ -10,7 +10,7 @@ const Administrator = () => {
   <div class="container mx-auto flex flex-wrap items-center justify-between">
   <a href="/" class="flex flex-col">
     <Logocomponent />
-      <small class="self-center text-sm font-thin tet-center leading-tight">An Education and Leadership Division of PRIMECS LLC</small>
+      <small class="self-center text-sm font-thin tet-center leading-tight">Designs Tracking and Correction System</small>
   </a>
   <p>{localStorage.getItem('activeaccount')}</p>
   <p>Customer</p>

@@ -48,7 +48,8 @@ const ViewDesignAdmin = (onClick) => {
                     try{
                         let feedbackObject = new FormData()
                         feedbackObject.append('DesignId', localStorage.getItem('aadminid'))
-                        feedbackObject.append('CustomerEmail', localStorage.getItem('aafeedbackemail'))
+                        feedbackObject.append('CustomerEmail', localStorage.getItem('aadmincustomeremail'))
+                        feedbackObject.append('DesignerEmail', localStorage.getItem('aadmindesigneremail'))
                         feedbackObject.append('uploaded_file', feedbackFile)
                         feedbackObject.append('CustomerText', feedbackText)
 
@@ -195,37 +196,44 @@ export default function AdminTabs() {
     const fetchDesigns = async() =>{
         let graphics = []
         const data = await axios({
-            method: 'get',
-            url: 'http://localhost:3000/api/viewAllContent'
+            method: 'post',
+            url: 'http://localhost:3000/api/viewCustomerAddressedDesign',
+            data: {CustomerEmail: localStorage.getItem('activeaccount'),
+        }
         })
         for (let i = 0; i < data.data.length; i++){
             graphics.push(
                 <tr>
                 <td scope="col" className="px-6 py-3">
-                    {data.data[i].OrganizationName}
+                    {data.data[i].DesignerEmail}
                 </td>
                 <td scope="col" className="px-6 py-3">
                 {data.data[i].id}
                 </td>
                 <td scope="col" className="px-6 py-3">
-                {data.data[i].Type}
+                {data.data[i].Description.slice(0,20)}
                 </td>
                 <td scope="col" className="px-6 py-3" onClick={async()=>{
-                     const approval = await axios({
-                        method: 'post',
-                        url: 'http://localhost:3000/api/updateDesign/'+data.data[i].id,
-                        data: {
-                            Status: 1
-                        }
-                    })
-                    localStorage.setItem('aafeedbackemail', data.data[i].OrganizationName)
-                    localStorage.setItem('aadmindesc', data.data[i].Type)
+                    //  const approval = await axios({
+                    //     method: 'post',
+                    //     url: 'http://localhost:3000/api/updateDesign/'+data.data[i].id,
+                    //     data: {
+                    //         Status: 1
+                    //     }
+                    // })
+                    console.log(data.data[i])
+                    localStorage.setItem('aadmindesigneremail', data.data[i].DesignerEmail)
+                    localStorage.setItem('aadmincustomeremail', data.data[i].CustomerEmail)
+                    localStorage.setItem('aadmindesc', data.data[i].Description)
                     localStorage.setItem('aadminid', data.data[i].id)
                     localStorage.setItem('aadminimage', `http://localhost:3000/publicfiles/${data.data[i].Files}`)
                     setViewAdmin(true)
                     window. scrollTo(0, 0)
+                    console.log(localStorage.getItem('aadmindesigneremail'))
                 }}>
-                    <Button text='Review & Comment'/>
+                    <Button text='Review & Comment' onClick={()=>{
+                        alert('Hello')
+                    }}/>
                 </td>
                 <td scope="col" className="px-6 py-3">
                 {returnStatus(data.data[i].Status)}
