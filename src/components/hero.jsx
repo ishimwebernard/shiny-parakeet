@@ -19,7 +19,7 @@ export default function Hero() {
         <div class="sm:text-center lg:text-left">
           <h1 class="text-4xl mt-50 tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
             <span class="deep-text block xl:inline text-blue-600">Designs Tracking &</span>
-            <span class="deep-text block green xl:inline"> Communications system</span> 
+            <span class="deep-text block green xl:inline"> Correction system</span> 
           </h1>
           <p class="mt-6  text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
           Elevate your design process with our innovative system. Experience a new level of precision and efficiency that simplifies collaboration, enhances creativity, and ensures exceptional design outcomes. Join us on a journey to transform your design management and elevate your creative potential
